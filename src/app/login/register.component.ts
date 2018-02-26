@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import swal from 'sweetalert';
+import { UsuarioService } from '../services/services.index';
+import { Usuario } from '../models/usuario.model';
+import { Router } from '@angular/router';
 declare function init_plugins();
 
 @Component({
@@ -11,9 +15,10 @@ declare function init_plugins();
 export class RegisterComponent implements OnInit {
   forma: FormGroup;
 
-  constructor() {}
+  constructor(private _usuarioService: UsuarioService,
+              public router: Router) {}
 
-  sonIguales(param1: string, param2: string) {
+   sonIguales(param1: string, param2: string) {
     return (form: FormGroup) => {
       const pass1 = form.controls[param1].value;
       const pass2 = form.controls[param2].value;
@@ -53,8 +58,16 @@ export class RegisterComponent implements OnInit {
       return;
     }
     if ( !this.forma.value.condiciones ) {
-      console.log('Debe aceptar las condiciones');
+      swal('Importante', 'Debe aceptar las condiciones', 'warning');
+      return;
+      // console.log('Debe aceptar las condiciones');
     }
-    console.log(this.forma.value);
-  }
+    const usuario = new Usuario(
+      this.forma.value.nombre,
+      this.forma.value.email,
+      this.forma.value.password
+    );
+    this._usuarioService.crearUsuario(usuario).subscribe(
+      res => this.router.navigate(['/login']));
+    }
 }

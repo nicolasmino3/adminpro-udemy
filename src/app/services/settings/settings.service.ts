@@ -5,7 +5,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 export class SettingsService {
   public ajustes: Ajustes = {
     url: 'assets/css/colors/default-dark.css',
-    tema: 'defualt'
+    tema: 'default'
   };
 
   constructor(@Inject(DOCUMENT) private _document) {
