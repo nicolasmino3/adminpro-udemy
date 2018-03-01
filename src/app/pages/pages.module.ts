@@ -10,6 +10,8 @@ import { ProgressComponent } from './progress/progress.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+
 // Pipe Module
 import { PipesModule } from '../pipes/pipes.module';
 // ng2-charts
@@ -25,6 +27,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 
+
 @NgModule({
     declarations: [
         PagesComponent,
@@ -37,7 +40,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
         PromesasComponent,
         RxjsComponent,
         ProfileComponent,
-        UsuariosComponent
+        UsuariosComponent,
+        ModalUploadComponent
     ],
     exports: [
         DashboardComponent,
