@@ -19,13 +19,11 @@ import { GraficoDonaComponent } from './components/grafico-dona/grafico-dona.com
 // Servicios
 import { ServicesModule } from './services/services.module';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
