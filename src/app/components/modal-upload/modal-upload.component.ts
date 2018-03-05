@@ -8,16 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class ModalUploadComponent implements OnInit {
-  oculto: string = '';
-  imagenSubir: File;
+  imagenSubir: File = null;
   imagenTemp: string = '';
   constructor( public _imagenService: SubirArchivoService,
                public _modalUploadService: ModalUploadService) { }
 
   ngOnInit() {
   }
-  subirImagen( archivo: File) {
-    // this._imagenService.subirArchivo( this.imagenSubir, );
+  subirImagen() {
+    
+    this._imagenService.subirArchivo( this.imagenSubir, this._modalUploadService.tipo, this._modalUploadService.id )
+          .then((resp) => {
+            console.log(resp);
+            this._modalUploadService.notificacion.emit(resp);
+            this.cerrarModal();
+          })
+          .catch(err => console.log('error en la carga'));
   }
   seleccionImage(archivo: File) {
     if ( !archivo ) {
@@ -35,6 +41,11 @@ export class ModalUploadComponent implements OnInit {
     const urlTempfile = reader.readAsDataURL(archivo);
     reader.onloadend = () => this.imagenTemp = reader.result;
 
+  }
+  cerrarModal() {
+    this.imagenSubir = null;
+    this.imagenTemp = null;
+    this._modalUploadService.ocultarModal();
   }
 
 }
